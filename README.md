@@ -85,7 +85,6 @@ class A1 extends A0
 class B extends Mixins
   constructor : ->
     @mixinSafe A0, A1
-# console.log new B
 console.log new B
 ```
 ######Result 3/4 (__proto__ is hided):
