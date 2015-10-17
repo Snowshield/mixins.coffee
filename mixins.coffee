@@ -12,8 +12,17 @@ class Mixins
           if @::[key]? then errProto++
           @::[key] = val
       # testing constructors
-      testChild = {}
-      Parent.apply(testChild, @arguments)
+      testChild = {}; text = Parent.toString()
+      # reg for 'this.<var> ='
+      this_reg_equal = /this.[A-Za-z$_][A-Za-z$_0-9]*\s*=/g
+      # reg for '<var>'
+      reg = /[A-Za-z$_][A-Za-z$_0-9]*/g
+      # results for 'this.<var> ='
+      results = text.match(this_reg_equal)
+      if results? # have results
+        vars = results.map (res) -> # 5 is 'this.'.length
+          testChild[res[5..].match(reg)[0]] = null
+      # counting repeats
       for key,val of testChild
         if @[key]? then errConstr++
       Parent.apply(@, @arguments)
