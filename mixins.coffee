@@ -3,7 +3,7 @@ class Mixins
   mixinSafe : (parents...)->
     errProto = 0
     errConstr = 0
-    @:: ?= {} # init prototype
+    @:: ||= {} # init prototype
     # reg for 'this.<var> ='
     this_reg_equal = /this.[A-Za-z$_][A-Za-z$_0-9]*\s*=/g
     # reg for '<var>'
@@ -41,9 +41,9 @@ class Mixins
       console.error msgTitle+msg.join(', ')
     delete @arguments; @
   mixin : (parents...)->
+    @:: ||= {} # init prototype
     parents.map (Parent)=>
       ctor = Parent::constructor
-      @:: ?= {} # init prototype
       for key,val of Parent::
         @::[key] = val unless ctor is val
       Parent.apply(@, @arguments)
