@@ -41,11 +41,10 @@ class Mixins
       console.error msgTitle+msg.join(', ')
     delete @arguments; @
   mixin : (parents...)->
-    parents.map (Parent)->
+    parents.map (Parent)=>
       ctor = Parent::constructor
       @:: ?= {} # init prototype
       for key,val of Parent::
         @::[key] = val unless ctor is val
       Parent.apply(@, @arguments)
-    ,@
     delete @arguments; @
