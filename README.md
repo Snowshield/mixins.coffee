@@ -15,9 +15,7 @@ console.log new B
 ```javascript
 B {
   a_constructor: 0,
-  prototype: {
-    a_prototype: 1
-  }
+  a_prototype: 1
 }
 ```
 Allow to copy both prototype and constructor variables to current class with **full inheritance support**.
@@ -60,13 +58,11 @@ D {
   b0_constructor: 0,
   b1_constructor: 0,
   b2_constructor: 0,
-  prototype: {
-    a0_prototype: 1,
-    a1_prototype: 1,
-    b0_prototype: 1,
-    b1_prototype: 1,
-    b2_prototype: 1,
-  }
+  a0_prototype: 1,
+  a1_prototype: 1,
+  b0_prototype: 1,
+  b1_prototype: 1,
+  b2_prototype: 1
 }
 ```
 Use `@mixinSafe` instead of `@mixin` to **see all conflicts** (variables with same names) in console.error. `@mixinSafe` is much slower so recomended to use **only in debug**.
@@ -89,14 +85,14 @@ console.log new B
 ```
 ######Result 3/4 (__proto__ is hided):
 ```javascript
-Mix errors: 1(prototype), 1(constructor)
+Mix errors:
+prototype(1): a0_prototype
+constructor(1): a0_constructor
 B {
   a0_constructor: 0,
-  a1_constructor: 1
-  prototype: {
-    a0_prototype: 0,
-    a1_prototype: 1
-  }
+  a1_constructor: 1,
+  a0_prototype: 0,
+  a1_prototype: 1
 }
 ```
 You also can **transfer arguments to parents' constructors**. Just add 'super' before `@mixin` or `@mixinSafe`.
